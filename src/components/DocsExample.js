@@ -13,7 +13,7 @@ const DocsExample = (props) => {
 
   return (
     <div className="example">
-      <CNav variant="tabs">
+      {/* <CNav variant="tabs">
         <CNavItem>
           <CNavLink href="#" active>
             <CIcon icon={cilMediaPlay} className="me-2" />
@@ -26,7 +26,7 @@ const DocsExample = (props) => {
             Code
           </CNavLink>
         </CNavItem>
-      </CNav>
+      </CNav> */}
       <CTabContent className="rounded-bottom">
         <CTabPane className="p-3 preview" visible>
           {children}

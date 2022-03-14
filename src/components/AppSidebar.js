@@ -17,8 +17,15 @@ import navigation from '../_nav'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
-  const unfoldable = useSelector((state) => state.sidebarUnfoldable)
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  // const unfoldable = useSelector((state) => state.sidebarUnfoldable)
+  // const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sideBar = useSelector((state) => state.sideBar)
+  // console.log('sideBar', sideBar)
+  const { sidebarShow, sidebarUnfoldable: unfoldable } = sideBar
+  // console.log('unfoldable', unfoldable)
+  // const state = useSelector((state) => state)
+  // console.log(state)
+  // console.log(unfoldable) // undefined / true / false
 
   return (
     <CSidebar
@@ -26,12 +33,13 @@ const AppSidebar = () => {
       unfoldable={unfoldable}
       visible={sidebarShow}
       onVisibleChange={(visible) => {
-        dispatch({ type: 'set', sidebarShow: visible })
+        dispatch({ type: 'setSideBar', payload: visible })
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        MindNerves
+        {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
+        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
@@ -40,7 +48,8 @@ const AppSidebar = () => {
       </CSidebarNav>
       <CSidebarToggler
         className="d-none d-lg-flex"
-        onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+        onClick={() => dispatch({ type: 'setUnfoldable', payload: !unfoldable })}
+        // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
       />
     </CSidebar>
   )

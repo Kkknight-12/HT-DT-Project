@@ -20,21 +20,26 @@ import { logo } from 'src/assets/brand/logo'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  // const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sideBar = useSelector((state) => state.sideBar)
+  const { sidebarShow } = sideBar
+  // const state = useSelector((state) => state)
+  // console.log('state', state)
+  // console.log('sidebarShow', sidebarShow)
 
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          onClick={() => dispatch({ type: 'setSideBar', payload: !sidebarShow })}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
-        <CHeaderNav className="d-none d-md-flex me-auto">
+        {/* <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink} activeClassName="active">
               Dashboard
@@ -46,8 +51,8 @@ const AppHeader = () => {
           <CNavItem>
             <CNavLink href="#">Settings</CNavLink>
           </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav>
+        </CHeaderNav> */}
+        {/* <CHeaderNav>
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilBell} size="lg" />
@@ -63,10 +68,10 @@ const AppHeader = () => {
               <CIcon icon={cilEnvelopeOpen} size="lg" />
             </CNavLink>
           </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav className="ms-3">
+        </CHeaderNav> */}
+        {/* <CHeaderNav className="ms-3">
           <AppHeaderDropdown />
-        </CHeaderNav>
+        </CHeaderNav> */}
       </CContainer>
       <CHeaderDivider />
       <CContainer fluid>

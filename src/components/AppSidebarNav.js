@@ -22,6 +22,7 @@ export const AppSidebarNav = ({ items }) => {
 
   const navItem = (item, index) => {
     const { component, name, badge, icon, ...rest } = item
+    // console.log('rest', rest)
     const Component = component
     return (
       <Component
@@ -39,6 +40,7 @@ export const AppSidebarNav = ({ items }) => {
   }
   const navGroup = (item, index) => {
     const { component, name, icon, to, ...rest } = item
+    // console.log('rest', rest)
     const Component = component
     return (
       <Component
