@@ -57,5 +57,9 @@ export const getAllService = (formData) => async (dispatch, getState) => {
 }
 
 export const getServiceSearch = (formData) => async (dispatch, getState) => {
-  dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: formData })
+  let searchTerm = Object.keys(formData).filter((k) => formData[k])
+  searchTerm = searchTerm[0]
+
+  const { data } = await api.fetchServiceBySearch(searchTerm, formData[searchTerm])
+  dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: data })
 }

@@ -11,15 +11,9 @@ const customerReducer = (state = { isLoading: true, customerData: [] }, action) 
         customerData: action.payload,
       }
     case 'FETCH_BY_SEARCH':
-      const cData = action.payload
-      let searchTerm = Object.keys(cData).filter((k) => cData[k])
-      searchTerm = searchTerm[0]
-      //   console.log('DATA', cData)
-      console.log('searchTerm', searchTerm)
       return {
         ...state,
-        customerData: state.customerData.filter((data) => data[searchTerm] === cData[searchTerm]),
-        // customerData: state.customerData.filter((data) => data.cust_ac_no === cData.cust_ac_no),
+        customerData: action.payload,
       }
     default:
       return state
