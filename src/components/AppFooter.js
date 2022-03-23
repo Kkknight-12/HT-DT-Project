@@ -9,7 +9,7 @@ const AppFooter = () => {
           CoreUI
         </a> */}
         {/* <span className="ms-1">&copy; 2021 creativeLabs.</span> */}
-        <p>MindNerves Technology</p>
+        <p>HoonerTek</p>
       </div>
       {/* <div className="ms-auto">
         <span className="me-1">Powered by</span>
