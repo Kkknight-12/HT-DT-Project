@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import moment from 'moment'
 import {
   CButton,
   CCard,
@@ -29,52 +30,58 @@ import { createService } from 'src/actions/service'
 
 const initialState = {
   si: '',
-  si_lob: '',
+  si_lob: 'prepaid',
   cust_ac_no: '',
-  source_systm: '',
-  si_act_date: '',
-  si_deact_date: '',
-  firstcall_date: '',
-  si_create_date: '',
+  // source_systm: '',
+  si_act_date: moment().format('YYYY-MM-DD'),
+  si_deact_date: moment().add('days', 365).format('YYYY-MM-DD'),
+  firstcall_date: moment().format('YYYY-MM-DD'),
+  si_create_date: moment().format('YYYY-MM-DD'),
   type_lte: '',
-  si_sts: '',
-  circle: '',
+  si_sts: 'active',
+  circle: 'maharashtra',
   barr_reason: '',
-  curr_stts: '',
+  // curr_stts: '',
   ekycready: '',
   volteflag: '',
   vipflag: '',
   dnd: '',
   imsi: '',
   imei: '',
-  dev_chng_dt: '',
+  dev_chng_dt: moment().format('YYYY-MM-DD'),
   sim_no: '',
-  sim_type: '',
+  sim_type: 'nano',
   sim_slot_pref: '',
   hndst_4g: '',
-  r_bndle: '',
+  ir_bndle: '',
   ir_region: '',
   ir_act: '',
   stbid: '',
-  stb_type: '',
+  stb_type: 'internet',
   vcid: '',
   pck_chg_dt: '',
   pckg: '',
   android_id: '',
   crdt_limit: '',
   data_usg_gb: '',
-  bnd_cnty: '',
-  data_cnty: '',
-  voice_cnty: '',
-  dtfup_100_cnt: '',
+  // bnd_cnty: '',
+  // data_cnty: '',
+  // voice_cnty: '',
+  // dtfup_100_cnt: '',
 }
+
+console.log(Object.keys(initialState).length)
 
 const Service = () => {
   const [validated, setValidated] = useState(false)
   const [formData, setFormData] = useState(initialState)
   const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
+  var formatedDate = moment().format('YYYY-MM-DD')
+  var nextyr_date = moment().add('days', 365).format('YYYY-MM-DD')
 
+  // var new_date = moment().add('days', 365).format('YYYY-MM-DD')
+  // console.log('new_date', new_date)
   const handleSubmit = (event) => {
     // const form = event.currentTarget
     // console.log('FORM', form.checkValidity())
@@ -94,7 +101,7 @@ const Service = () => {
     }
     event.preventDefault()
     setValidated(true)
-    // console.log('formData', formData)
+    console.log('Service-formData', formData)
     if (formData.si && formData.si_lob && formData.cust_ac_no) {
       dispatch(createService(formData))
       setVisible(true)
@@ -184,25 +191,39 @@ const Service = () => {
                   validated={validated}
                   onSubmit={handleSubmit}
                 >
-                  <CCol md={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="si">Service</CFormLabel>
                     <CFormInput onChange={handleFormData} name="si" type="text" id="si" required />
                     <CFormFeedback invalid>Please provide a Service.</CFormFeedback>
                   </CCol>
-                  <CCol md={6}>
-                    <CFormLabel htmlFor="si_lob"> Service Line Of Business</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="si_lob">Line Of Business</CFormLabel>
+                    {/* <CFormInput
                       onChange={handleFormData}
-                      name="si_lob"
                       type="text"
+                      name="si_lob"
                       id="si_lob"
                       required
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="si_lob"
+                      id="si_lob"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="prepaid">Prepaid</option>
+                      <option value="postpaid">Postpaid</option>
+                      <option value="dth">Dth</option>
+                      <option value="telemedia">Telemedia</option>
+                    </CFormSelect>
                     <CFormFeedback invalid>
                       Please provide a Service Line Of Business.
                     </CFormFeedback>
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="cust_ac_no">Customer Account Number</CFormLabel>
                     <CFormInput
                       onChange={handleFormData}
@@ -212,7 +233,7 @@ const Service = () => {
                     />
                     <CFormFeedback invalid>Please provide a Customer Account Number.</CFormFeedback>
                   </CCol>
-                  <CCol xs={6}>
+                  {/* <CCol xs={6}>
                     <CFormLabel htmlFor="source_systm">Source System</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -220,44 +241,52 @@ const Service = () => {
                       name="source_systm"
                       id="source_systm"
                     />
-                  </CCol>
-                  <CCol md={6}>
+                  </CCol> */}
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="si_act_date">Service Activation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="si_act_date"
                       id="si_act_date"
+                      type="date"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol md={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="si_deact_date">Service Deactivation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="si_deact_date"
                       id="si_act_date"
+                      type="date"
+                      defaultValue={nextyr_date}
                     />
                   </CCol>
-                  <CCol md={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="firstcall_date">First Call Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="firstcall_date"
                       id="firstcall_date"
+                      type="date"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="si_create_date">Service Create Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="si_create_date"
                       id="si_create_date"
+                      type="date"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="type_lte">Type LTE</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -266,26 +295,41 @@ const Service = () => {
                       id="type_lte"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="si_sts">Service STS</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="si_sts">SI Status</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="si_sts"
                       id="si_sts"
+                      value="Active"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="circle"> Circle</CFormLabel>
-                    <CFormInput
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="circle"
                       id="circle"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      onChange={handleFormData}
+                      name="circle"
+                      id="circle"
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="maharashtra">Maharashtra</option>
+                      <option value="gujrat">Gujrat</option>
+                      <option value="rajasthan">Rajasthan</option>
+                      <option value="madhyapradesh">Madhya Pradesh</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="barr_reason"> Barred Reason</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="barr_reason"> Barring Reason</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -293,7 +337,7 @@ const Service = () => {
                       id="barr_reason"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  {/* <CCol xs={6}>
                     <CFormLabel htmlFor="curr_stts"> Curr Stts</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -301,9 +345,9 @@ const Service = () => {
                       name="curr_stts"
                       id="curr_stts"
                     />
-                  </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="ekycready"> E Kyc Ready</CFormLabel>
+                  </CCol> */}
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="ekycready">E KYC</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -311,8 +355,8 @@ const Service = () => {
                       id="ekycready"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="volteflag"> Volte Flag</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="volteflag">Volte</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -320,8 +364,8 @@ const Service = () => {
                       id="volteflag"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="vipflag">Vip Flag</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="vipflag">VIP</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -329,8 +373,8 @@ const Service = () => {
                       id="vipflag"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="dnd"> Dnd</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="dnd">Do Not Disturb</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -338,8 +382,8 @@ const Service = () => {
                       id="dnd"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="imsi"> IMSI</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="imsi">IMSI</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -347,8 +391,8 @@ const Service = () => {
                       id="imsi"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="imei"> IMEI</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="imei">IMEI</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -356,17 +400,19 @@ const Service = () => {
                       id="imei"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="dev_chng_dt"> Dev Change Date</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="dev_chng_dt">Device Change Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="dev_chng_dt"
                       id="dev_chng_dt"
+                      type="date"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="sim_no"> Sim Number</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="sim_no">SIM Number</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -374,17 +420,31 @@ const Service = () => {
                       id="sim_no"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="sim_type"> Sim Type</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="sim_type">SIM Type</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="sim_type"
                       id="sim_type"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      onChange={handleFormData}
+                      name="sim_type"
+                      id="sim_type"
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="nano">Nano</option>
+                      <option value="esim">E-SIM</option>
+                      <option value="rajasthan">Rajasthan</option>
+                      <option value="madhyapradesh">Madhya Pradesh</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="sim_slot_pref"> Sim Slot</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="sim_slot_pref">SIM Slot Preference</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -392,8 +452,8 @@ const Service = () => {
                       id="sim_slot_pref"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="hndst_4g"> Handset 4g</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="hndst_4g">4G</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -401,25 +461,25 @@ const Service = () => {
                       id="hndst_4g"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="r_bndle"> R Bundle</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="ir_bndle">International Roaming Bundle</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
-                      name="r_bndle"
-                      id="r_bndle"
+                      name="ir_bndle"
+                      id="ir_bndle"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="ir_region"> Ir Region</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="ir_region">International Roaming Region</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="ir_region"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="ir_act"> Ir Act</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="ir_act">International Roaming Activation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -427,8 +487,8 @@ const Service = () => {
                       id="ir_act"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="stbid">Stbid</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="stbid">STB ID</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -436,17 +496,30 @@ const Service = () => {
                       id="stbid"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="stb_type">Stb Type</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="stb_type">STB Type</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="stb_type"
                       id="stb_type"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      onChange={handleFormData}
+                      name="sim_type"
+                      id="sim_type"
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="internet">Internet</option>
+                      <option value="hd">HD</option>
+                      <option value="sd">SD</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="vcid">Vc Id</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="vcid">VC ID</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -454,7 +527,7 @@ const Service = () => {
                       id="vcid"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="pck_chg_dt">Package Change Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -463,7 +536,7 @@ const Service = () => {
                       id="pck_chg_dt"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="pckg">Package</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -472,8 +545,8 @@ const Service = () => {
                       id="pckg"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="android_id">Andriod Id</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="android_id">Andriod ID</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -481,7 +554,7 @@ const Service = () => {
                       id="android_id"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="crdt_limit">Credit Limit</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -490,8 +563,8 @@ const Service = () => {
                       id="crdt_limit"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="data_usg_gb">Data Usage in Gb</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="data_usg_gb">Data Limit</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -499,7 +572,7 @@ const Service = () => {
                       id="data_usg_gb"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  {/* <CCol xs={6}>
                     <CFormLabel htmlFor="bnd_cnty">Band Cnty</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -533,7 +606,7 @@ const Service = () => {
                       name="dtfup_100_cnt"
                       id="dtfup_100_cnt"
                     />
-                  </CCol>
+                  </CCol> */}
                   <CCol xs={12}>
                     <CButton type="submit">Submit</CButton>
                   </CCol>

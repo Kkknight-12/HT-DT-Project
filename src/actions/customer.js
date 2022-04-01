@@ -6,7 +6,7 @@ export const createCustomer = (sendData) => {
     // const { si, content, email } = sendData;
     const data = {
       cust_ac_no: sendData.cust_ac_no,
-      acc_lob: sendData.acc_lob,
+      // acc_lob: sendData.acc_lob,
       is_b2b_acc: sendData.is_b2b_acc,
       parent_ac_no: sendData.parent_ac_no,
       root_ac_no: sendData.root_ac_no,
@@ -24,7 +24,6 @@ export const createCustomer = (sendData) => {
       pan: sendData.pan,
       res_addrss: sendData.res_addrss,
       cors_addrss: sendData.cors_addrss,
-      circle: sendData.circle,
       cust_type: sendData.cust_type,
       cust_class: sendData.cust_class,
       cust_seg: sendData.cust_seg,
@@ -36,8 +35,8 @@ export const createCustomer = (sendData) => {
       cust_ivr_lang: sendData.cust_ivr_lang,
       pref_comm_lang: sendData.pref_comm_lang,
       pref_comm_ch: sendData.pref_comm_ch,
-      src_lob: sendData.src_lob,
-      source_systm: sendData.source_systm,
+      // src_lob: sendData.src_lob,
+      // source_systm: sendData.source_systm,
     }
     // console.log('data', data)
 

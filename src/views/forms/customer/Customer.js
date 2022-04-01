@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import moment from 'moment'
 import {
   CButton,
   CCard,
@@ -27,38 +28,34 @@ import { createCustomer } from 'src/actions/customer'
 
 const initialState = {
   cust_ac_no: '',
-  acc_lob: '',
-  is_b2b_acc: '',
+  is_b2b_acc: 'n',
   parent_ac_no: '',
   root_ac_no: '',
-  org_name: '',
-  org_type: '',
-  prename: '',
+  org_name: 'Hoonar Tekwurks Pvt Ltd',
+  org_type: 'Medium',
+  prename: 'mr',
   fname: '',
   mname: '',
   lname: '',
-  nationality: '',
+  nationality: 'india',
   email: '',
-  gender: '',
+  gender: 'm',
   rtn: '',
-  dob: '',
+  dob: '1900-01-01',
   pan: '',
-  res_addrss: '',
-  cors_addrss: '',
-  circle: '',
-  cust_type: '',
-  cust_class: '',
-  cust_seg: '',
-  cust_cat: '',
-  cust_create_dt: '',
-  cust_stts: '',
-  cust_act_dt: '',
+  res_addrss: 'Pune',
+  cors_addrss: 'Mumbai',
+  cust_type: 'Silver',
+  cust_class: 'retail',
+  cust_seg: 'b2c',
+  cust_cat: 'salaried',
+  cust_create_dt: moment().format('YYYY-MM-DD'),
+  cust_stts: 'Active',
+  cust_act_dt: moment().format('YYYY-MM-DD'),
   cust_deact_dt: '',
-  cust_ivr_lang: '',
-  pref_comm_lang: '',
-  pref_comm_ch: '',
-  src_lob: '',
-  source_systm: '',
+  cust_ivr_lang: 'English',
+  pref_comm_lang: 'English',
+  pref_comm_ch: 'Email',
 }
 
 const Customer = () => {
@@ -66,6 +63,10 @@ const Customer = () => {
   const [formData, setFormData] = useState(initialState)
   const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
+
+  var formatedDate = moment().format('YYYY-MM-DD')
+
+  console.log(formatedDate)
 
   const handleSubmit = (event) => {
     // const form = event.currentTarget
@@ -86,7 +87,7 @@ const Customer = () => {
     }
     event.preventDefault()
     setValidated(true)
-    // console.log(formData)
+    console.log(formData)
     // createCustomer
     if (formData.cust_ac_no) {
       dispatch(createCustomer(formData))
@@ -177,7 +178,7 @@ const Customer = () => {
                   validated={validated}
                   onSubmit={handleSubmit}
                 >
-                  <CCol md={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="cust_ac_no">Customer Account Number</CFormLabel>
                     <CFormInput
                       name="cust_ac_no"
@@ -188,7 +189,7 @@ const Customer = () => {
                     />
                     <CFormFeedback invalid>Please provide a Customer Account Number.</CFormFeedback>
                   </CCol>
-                  <CCol md={6}>
+                  {/* <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="acc_lob"> Account Line Of Business</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -197,17 +198,30 @@ const Customer = () => {
                       type="text"
                       id="acc_lob"
                     />
-                  </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="is_b2b_acc">Is b2b Account</CFormLabel>
-                    <CFormInput
+                  </CCol> */}
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="is_b2b_acc">B2B Customer</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="is_b2b_acc"
                       id="is_b2b_acc"
-                    />
+                      defaultValue={'N'}
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="is_b2b_acc"
+                      id="is_b2b_acc"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="y">N</option>
+                      <option value="n">Y</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="parent_ac_no">Parent Account Number</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -216,7 +230,7 @@ const Customer = () => {
                       id="parent_ac_no"
                     />
                   </CCol>
-                  <CCol md={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="root_ac_no">Root Account Number</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -225,35 +239,30 @@ const Customer = () => {
                       id="root_ac_no"
                     />
                   </CCol>
-                  <CCol md={6}>
-                    <CFormLabel htmlFor="org_name">Organization Name</CFormLabel>
-                    <CFormInput
-                      style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
-                      onChange={handleFormData}
-                      name="org_name"
-                      id="org_name"
-                    />
-                  </CCol>
-                  <CCol md={12}>
-                    <CFormLabel htmlFor="org_type">Organization Type</CFormLabel>
-                    <CFormInput
-                      style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
-                      onChange={handleFormData}
-                      name="org_type"
-                      id="org_type"
-                    />
-                  </CCol>
-                  <CCol xs={2}>
-                    <CFormLabel htmlFor="prename">Pre Name</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="prename">Salutation</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="prename"
                       id="prename"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="prename"
+                      id="prename"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="mr">Mr.</option>
+                      <option value="mrs">Mrs.</option>
+                      <option value="miss">Miss.</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={10}>
-                    <CFormLabel htmlFor="fname"> First Name</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="fname">First Name</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -261,7 +270,7 @@ const Customer = () => {
                       id="fname"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="mname">Middle Name</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -270,8 +279,8 @@ const Customer = () => {
                       id="mname"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="lname"> Last Name</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="lname">Last Name</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -279,17 +288,50 @@ const Customer = () => {
                       id="lname"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="nationality"> Nationality</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="org_name">Organization Name</CFormLabel>
                     <CFormInput
+                      style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
+                      onChange={handleFormData}
+                      name="org_name"
+                      id="org_name"
+                      defaultValue={'Hoonar Tekwurks Pvt Ltd'}
+                    />
+                  </CCol>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="org_type">Organization Type</CFormLabel>
+                    <CFormInput
+                      style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
+                      onChange={handleFormData}
+                      name="org_type"
+                      id="org_type"
+                      defaultValue={'Medium'}
+                      // value="Medium"
+                    />
+                  </CCol>
+
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="nationality">Nationality</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="nationality"
                       id="nationality"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="sm"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="nationality"
+                      id="nationality"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="india">India</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="email"> Email</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="email">Email Address</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -298,17 +340,29 @@ const Customer = () => {
                       id="email"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="gender"> Gender</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="gender">Gender</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="gender"
                       id="gender"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="sm"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="gender"
+                      id="gender"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="rtn"> RTN</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="rtn">Contact Number</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -316,18 +370,19 @@ const Customer = () => {
                       id="rtn"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="dob"> Date Of Birth</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="dob">Date Of Birth</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
                       onChange={handleFormData}
                       name="dob"
                       type="date"
                       id="dob"
+                      defaultValue={'1900-01-01'}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="pan"> PAN</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="pan">PAN Number</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
@@ -335,25 +390,27 @@ const Customer = () => {
                       id="pan"
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="res_addrss"> Residential Address</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="res_addrss">Residential Address</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="res_addrss"
                       id="res_addrss"
+                      defaultValue={'Pune'}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cors_addrss"> Cors Address</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cors_addrss">Correspondance Address</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cors_addrss"
                       id="cors_addrss"
+                      defaultValue={'Mumbai'}
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  {/* <CCol xs={6}>
                     <CFormLabel htmlFor="circle"> Circle</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -361,74 +418,114 @@ const Customer = () => {
                       name="circle"
                       id="circle"
                     />
-                  </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_type"> Customer Type</CFormLabel>
+                  </CCol> */}
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_type">Customer Type</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cust_type"
                       id="cust_type"
+                      defaultValue={'Silver'}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_class"> Customer Class</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_class">Customer Class</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cust_class"
                       id="cust_class"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="cust_class"
+                      id="cust_class"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="retail">Retail</option>
+                      <option value="corporate">Corporate</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_seg"> Customer Segment</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_seg">Customer Segment</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cust_seg"
                       id="cust_seg"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="cust_seg"
+                      id="cust_seg"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="b2c">B2C</option>
+                      <option value="b2b">B2B</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_cat"> Customer Category</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_cat">Customer Category</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cust_cat"
                       id="cust_cat"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="cust_cat"
+                      id="cust_cat"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="salaried">Salaried</option>
+                      <option value="business">Business</option>
+                      <option value="homemaker">Homemaker</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_create_dt"> Customer Create Date</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_create_dt">Customer Creation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
                       onChange={handleFormData}
                       name="cust_create_dt"
                       type="date"
                       id="cust_create_dt"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_stts"> Customer stts</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_stts">Customer Status</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
                       onChange={handleFormData}
                       name="cust_stts"
-                      type="date"
                       id="cust_stts"
+                      defaultValue={'Active'}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_act_dt"> Customer Activation Date</CFormLabel>
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_act_dt">Customer Activation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
                       onChange={handleFormData}
                       name="cust_act_dt"
                       type="date"
                       id="cust_act_dt"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="cust_deact_dt">Customer Deactivation Date</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
@@ -436,38 +533,84 @@ const Customer = () => {
                       name="cust_deact_dt"
                       type="date"
                       id="cust_deact_dt"
+                      defaultValue={formatedDate}
                     />
                   </CCol>
-                  <CCol xs={6}>
-                    <CFormLabel htmlFor="cust_ivr_lang">Customer IVR Language</CFormLabel>
-                    <CFormInput
+                  <CCol lg={3} md={6}>
+                    <CFormLabel htmlFor="cust_ivr_lang">IVR Language</CFormLabel>
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none', paddingRight: '0' }}
                       onChange={handleFormData}
                       name="cust_ivr_lang"
                       id="cust_ivr_lang"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="cust_ivr_lang"
+                      id="cust_ivr_lang"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="english">English</option>
+                      <option value="hindi">Hindi</option>
+                      <option value="marathi">Marathi</option>
+                      <option value="bengali">Bengali</option>
+                      <option value="gujrati">Gujrati</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="pref_comm_lang">
                       Preference Communication Language
                     </CFormLabel>
-                    <CFormInput
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="pref_comm_lang"
                       id="pref_comm_lang"
                     />
+                   */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="pref_comm_lang"
+                      id="pref_comm_lang"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="english">English</option>
+                      <option value="hindi">Hindi</option>
+                      <option value="marathi">Marathi</option>
+                      <option value="bengali">Bengali</option>
+                      <option value="gujrati">Gujrati</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="pref_comm_ch">Preference Communication Channel</CFormLabel>
-                    <CFormInput
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="pref_comm_ch"
                       id="pref_comm_ch"
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="pref_comm_ch"
+                      id="pref_comm_ch"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="email">Email</option>
+                      <option value="phone">Phone call</option>
+                      <option value="sms">Sms Texting</option>
+                      <option value="whatsapp">Whats App</option>
+                    </CFormSelect>
                   </CCol>
-                  <CCol xs={6}>
+                  {/* <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="src_lob">SRC Line Of Business</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -476,7 +619,7 @@ const Customer = () => {
                       id="src_lob"
                     />
                   </CCol>
-                  <CCol xs={6}>
+                  <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="source_systm">Source System</CFormLabel>
                     <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
@@ -484,7 +627,7 @@ const Customer = () => {
                       name="source_systm"
                       id="source_systm"
                     />
-                  </CCol>
+                  </CCol> */}
                   <CCol xs={12}>
                     <CButton type="submit">Submit</CButton>
                   </CCol>

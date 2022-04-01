@@ -29,7 +29,7 @@ export const createService = (sendData) => {
       sim_type: sendData.sim_type,
       sim_slot_pref: sendData.sim_slot_pref,
       hndst_4g: sendData.hndst_4g,
-      r_bndle: sendData.r_bndle,
+      ir_bndle: sendData.ir_bndle,
       ir_region: sendData.ir_region,
       ir_act: sendData.ir_act,
       stbid: sendData.stbid,
