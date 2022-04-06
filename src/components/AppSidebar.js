@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { CAvatar } from '@coreui/react'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -12,6 +13,7 @@ import { sygnet } from 'src/assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
+import avatar8 from './../assets/images/avatars/8.jpg'
 
 // sidebar nav config
 import navigation from '../_nav'
@@ -38,8 +40,9 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        DigiTwin
+        <div className="me-2">DigiTwin</div>
         {/* <img src={avatar1} alt="" /> */}
+        <CAvatar src={avatar8} size="md" />
         {/* <CIcon className="sidebar-brand-full" icon={avatar1} height={35} />
         <CIcon className="sidebar-brand-narrow" icon={avatar1} height={35} /> */}
       </CSidebarBrand>

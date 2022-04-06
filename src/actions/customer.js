@@ -51,10 +51,15 @@ export const getAllCustomer = (formData) => async (dispatch, getState) => {
   dispatch({ type: 'FETCH_ALL_CUSTOMER', payload: data })
 }
 
-export const getCustomerSearch = (formData) => async (dispatch, getState) => {
+export const getCustomerFormSearch = (formData) => async (dispatch, getState) => {
   let searchTerm = Object.keys(formData).filter((k) => formData[k])
   searchTerm = searchTerm[0]
-
   const { data } = await api.fetchCustomerBySearch(searchTerm, formData[searchTerm])
+  dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
+}
+export const getCustomerSearch = (formData) => async (dispatch, getState) => {
+  const { cust_ac_no } = formData
+  console.log('getCustomerSearch', formData)
+  const { data } = await api.fetchCustomerBySearch('cust_ac_no', cust_ac_no)
   dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
 }

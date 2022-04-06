@@ -19,12 +19,17 @@ import {
   CModalHeader,
   CModalTitle,
   CModalBody,
+  CAvatar,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import { DocsExample } from 'src/components'
 import { useDispatch, useSelector } from 'react-redux'
 
 // action
 import { createCustomer } from 'src/actions/customer'
+//image
+import airtel from './../../../assets/images/Airtel-Icon-.jpg'
+import './customer.css'
 
 const initialState = {
   cust_ac_no: '',
@@ -41,7 +46,7 @@ const initialState = {
   email: '',
   gender: 'm',
   rtn: '',
-  dob: '1900-01-01',
+  dob: '1990-01-01',
   pan: '',
   res_addrss: 'Pune',
   cors_addrss: 'Mumbai',
@@ -52,7 +57,7 @@ const initialState = {
   cust_create_dt: moment().format('YYYY-MM-DD'),
   cust_stts: 'Active',
   cust_act_dt: moment().format('YYYY-MM-DD'),
-  cust_deact_dt: '',
+  cust_deact_dt: '9999-01-01',
   cust_ivr_lang: 'English',
   pref_comm_lang: 'English',
   pref_comm_ch: 'Email',
@@ -149,10 +154,24 @@ const Customer = () => {
       </CCol> */}
         <CCol xs={12}>
           <CCard className="mb-4">
-            <CCardHeader>
-              {/* <strong>Create</strong> <small>Gutters</small> */}
-              Create Customer Account
-            </CCardHeader>
+            <div className="row">
+              <div className="col">
+                <img className="header-icon" src={airtel} alt="" />
+              </div>
+              <div className="col d-flex text-center align-items-center justify-content-center">
+                <h1>Create Customer Account</h1>
+              </div>
+              <div className="col text-end">
+                <img className="header-icon " src={airtel} alt="" />
+              </div>
+            </div>
+            {/* <div className="d-flex justify-content-between">
+              <img className="header-icon" src={airtel} alt="" />
+              <div className="d-flex align-items-center justify-content-center ps-5 heading">
+                <h1>Create Customer Account</h1>
+              </div>
+              <img className="header-icon ms-auto" src={airtel} alt="" />
+            </div> */}
             <CCardBody>
               {/* <p className="text-medium-emphasis small">
               By adding <a href="https://coreui.io/docs/layout/gutters/">gutter modifier classes</a>
@@ -319,7 +338,7 @@ const Customer = () => {
                       id="nationality"
                     /> */}
                     <CFormSelect
-                      size="sm"
+                      size="md"
                       className="mb-3"
                       aria-label="Small select example"
                       name="nationality"
@@ -328,6 +347,10 @@ const Customer = () => {
                     >
                       {/* <option>Salutation</option> */}
                       <option value="india">India</option>
+                      <option value="australia">Australia</option>
+                      <option value="united-states-of-america">United States of America</option>
+                      <option value="united-kingdom">United Kingdom</option>
+                      <option value="canada">Canada</option>
                     </CFormSelect>
                   </CCol>
                   <CCol lg={3} md={6}>
@@ -349,7 +372,7 @@ const Customer = () => {
                       id="gender"
                     /> */}
                     <CFormSelect
-                      size="sm"
+                      size="md"
                       className="mb-3"
                       aria-label="Small select example"
                       name="gender"
@@ -378,7 +401,7 @@ const Customer = () => {
                       name="dob"
                       type="date"
                       id="dob"
-                      defaultValue={'1900-01-01'}
+                      defaultValue={'1990-01-01'}
                     />
                   </CCol>
                   <CCol lg={3} md={6}>
@@ -421,13 +444,26 @@ const Customer = () => {
                   </CCol> */}
                   <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="cust_type">Customer Type</CFormLabel>
-                    <CFormInput
+                    {/* <CFormInput
                       style={{ borderColor: '#b1b7c1', backgroundImage: 'none' }}
                       onChange={handleFormData}
                       name="cust_type"
                       id="cust_type"
                       defaultValue={'Silver'}
-                    />
+                    /> */}
+                    <CFormSelect
+                      size="md"
+                      className="mb-3"
+                      aria-label="Small select example"
+                      name="cust_type"
+                      id="cust_type"
+                      onChange={handleFormData}
+                    >
+                      {/* <option>Salutation</option> */}
+                      <option value="silver">Silver</option>
+                      <option value="gold">Gold</option>
+                      <option value="platinum">Platinum</option>
+                    </CFormSelect>
                   </CCol>
                   <CCol lg={3} md={6}>
                     <CFormLabel htmlFor="cust_class">Customer Class</CFormLabel>
@@ -533,7 +569,7 @@ const Customer = () => {
                       name="cust_deact_dt"
                       type="date"
                       id="cust_deact_dt"
-                      defaultValue={formatedDate}
+                      value={'9999-01-01'}
                     />
                   </CCol>
                   <CCol lg={3} md={6}>

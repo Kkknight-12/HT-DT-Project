@@ -20,20 +20,23 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 
 // actions
-import { getAllCustomer, getCustomerSearch } from 'src/actions/customer'
+import { getAllCustomer, getCustomerFormSearch, getCustomerSearch } from 'src/actions/customer'
 
 import './customer.css'
 import { useEffect } from 'react'
 
 const initialState = {
-  cust_ac_no: '',
   email: '',
   rtn: '',
   pan: '',
 }
+const customerInitialState = {
+  cust_ac_no: '',
+}
 
 export default function Customer() {
   const [formData, setFormData] = useState(initialState)
+  const [formCustomerData, setCustomerFormData] = useState(customerInitialState)
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const customerR = useSelector((state) => state.customerR)
@@ -49,11 +52,19 @@ export default function Customer() {
   const handleSubmit = (event) => {
     event.preventDefault()
     // DISPATCH ACTION
-    dispatch(getCustomerSearch(formData))
+    dispatch(getCustomerFormSearch(formData))
+  }
+  const handleCustomerSubmit = (event) => {
+    event.preventDefault()
+    // DISPATCH ACTION
+    dispatch(getCustomerSearch(formCustomerData))
   }
 
   const handleFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  const handleCustomerFormData = (e) => {
+    setCustomerFormData({ ...formCustomerData, [e.target.name]: e.target.value })
   }
 
   useEffect(() => {
@@ -69,12 +80,25 @@ export default function Customer() {
               Search Customer
             </CCardHeader>
             <CCardBody>
-              <CForm className="row g-3" onSubmit={handleSubmit}>
-                {/* <strong>Create</strong> <small>Gutters</small> */}
+              <CForm className="row g-3" onSubmit={handleCustomerSubmit}>
                 <CCol md={6}>
                   <CFormLabel htmlFor="cust_ac_no">Customer Acccount Number</CFormLabel>
-                  <CFormInput onChange={handleFormData} name="cust_ac_no" type="text" id="can" />
+                  <CFormInput
+                    onChange={handleCustomerFormData}
+                    name="cust_ac_no"
+                    type="text"
+                    id="can"
+                  />
                 </CCol>
+                <CCol xs={12}>
+                  <CButton type="submit">Search</CButton>
+                </CCol>
+              </CForm>
+            </CCardBody>
+            <CCardBody>
+              <CForm className="row g-3" onSubmit={handleSubmit}>
+                {/* <strong>Create</strong> <small>Gutters</small> */}
+
                 <CCol md={6}>
                   <CFormLabel htmlFor="email">Email</CFormLabel>
                   <CFormInput onChange={handleFormData} name="email" type="email" id="emailc" />

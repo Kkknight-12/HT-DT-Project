@@ -20,21 +20,24 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 
 // actions
-import { getAllService, getServiceSearch } from 'src/actions/service'
+import { getAllService, getServiceSearch, getServiceFormSearch } from 'src/actions/service'
 
 //
 import './service.css'
 
 const initialState = {
-  si: '',
   imei: '',
   imsi: '',
   vcid: '',
-  aid: '',
+  android_id: '',
+}
+const serviceInitialState = {
+  si: '',
 }
 
 export default function Service() {
   const [formData, setFormData] = useState(initialState)
+  const [serviceformData, setServiceFormData] = useState(serviceInitialState)
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const serviceR = useSelector((state) => state.serviceR)
@@ -44,7 +47,13 @@ export default function Service() {
   const handleSubmit = (event) => {
     event.preventDefault()
     // DISPATCH ACTION
-    dispatch(getServiceSearch(formData))
+    dispatch(getServiceFormSearch(formData))
+  }
+
+  const handleServiceFormSubmit = (event) => {
+    event.preventDefault()
+    // DISPATCH ACTION
+    dispatch(getServiceSearch(serviceformData))
   }
 
   const handleShowCol = () => {
@@ -53,6 +62,10 @@ export default function Service() {
 
   const handleFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleServiceFormData = (e) => {
+    setServiceFormData({ ...serviceformData, [e.target.name]: e.target.value })
   }
 
   useEffect(() => {
@@ -69,15 +82,22 @@ export default function Service() {
               Search Service
             </CCardHeader>
             <CCardBody>
-              <CForm className="row g-3" onSubmit={handleSubmit}>
+              <CForm className="row g-3" onSubmit={handleServiceFormSubmit}>
                 {/* <strong>Create</strong> <small>Gutters</small> */}
                 <CCol md={6}>
                   <CFormLabel htmlFor="si">Service Instance (SI)</CFormLabel>
-                  <CFormInput onChange={handleFormData} name="si" type="text" id="si" />
+                  <CFormInput onChange={handleServiceFormData} name="si" type="text" id="si" />
                 </CCol>
+                <CCol xs={12}>
+                  <CButton type="submit">Search</CButton>
+                </CCol>
+              </CForm>
+            </CCardBody>
+            <CCardBody>
+              <CForm className="row g-3" onSubmit={handleSubmit}>
                 <CCol md={6}>
                   <CFormLabel htmlFor="imei">IMEI</CFormLabel>
-                  <CFormInput onChange={handleFormData} name="imei" type="email" id="imei" />
+                  <CFormInput onChange={handleFormData} name="imei" type="text" id="imei" />
                 </CCol>
                 <CCol md={6}>
                   <CFormLabel htmlFor="imsi">IMSI</CFormLabel>
@@ -89,7 +109,12 @@ export default function Service() {
                 </CCol>
                 <CCol md={6}>
                   <CFormLabel htmlFor="aid">Android ID</CFormLabel>
-                  <CFormInput onChange={handleFormData} name="aid" type="text" id="aid" />
+                  <CFormInput
+                    onChange={handleFormData}
+                    name="android_id"
+                    type="text"
+                    id="android_id"
+                  />
                 </CCol>
                 <CCol xs={12}>
                   <CButton type="submit">Search</CButton>

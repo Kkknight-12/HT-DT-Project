@@ -27,6 +27,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // action
 import { createService } from 'src/actions/service'
+import airtel from './../../../assets/images/Airtel-Icon-.jpg'
+
+import './service.css'
 
 const initialState = {
   si: '',
@@ -34,7 +37,7 @@ const initialState = {
   cust_ac_no: '',
   // source_systm: '',
   si_act_date: moment().format('YYYY-MM-DD'),
-  si_deact_date: moment().add('days', 365).format('YYYY-MM-DD'),
+  si_deact_date: moment().add('days', 180).format('YYYY-MM-DD'),
   firstcall_date: moment().format('YYYY-MM-DD'),
   si_create_date: moment().format('YYYY-MM-DD'),
   type_lte: '',
@@ -162,10 +165,21 @@ const Service = () => {
       </CCol> */}
         <CCol xs={12}>
           <CCard className="mb-4">
-            <CCardHeader>
-              {/* <strong>Create</strong> <small>Gutters</small> */}
+            {/* <CCardHeader>
+              
               Create Service
-            </CCardHeader>
+            </CCardHeader> */}
+            <div className="row">
+              <div className="col">
+                <img className="header-icon" src={airtel} alt="" />
+              </div>
+              <div className="col d-flex text-center align-items-center justify-content-center">
+                <h1>Create Service</h1>
+              </div>
+              <div className="col text-end">
+                <img className="header-icon" src={airtel} alt="" />
+              </div>
+            </div>
             <CCardBody>
               {/* <p className="text-medium-emphasis small">
               By adding <a href="https://coreui.io/docs/layout/gutters/">gutter modifier classes</a>
@@ -439,8 +453,6 @@ const Service = () => {
                       {/* <option>Salutation</option> */}
                       <option value="nano">Nano</option>
                       <option value="esim">E-SIM</option>
-                      <option value="rajasthan">Rajasthan</option>
-                      <option value="madhyapradesh">Madhya Pradesh</option>
                     </CFormSelect>
                   </CCol>
                   <CCol lg={3} md={6}>
