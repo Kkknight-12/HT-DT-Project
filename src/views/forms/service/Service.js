@@ -140,29 +140,6 @@ const Service = () => {
       </CModal>
 
       <CRow>
-        {/* <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Layout</strong> <small>Form grid</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              More complex forms can be built using our grid classes. Use these for form layouts
-              that require multiple columns, varied widths, and additional alignment options.
-            </p>
-            <DocsExample href="forms/layout#form-grid">
-              <CRow>
-                <CCol xs>
-                  <CFormInput placeholder="First name" aria-label="First name" />
-                </CCol>
-                <CCol xs>
-                  <CFormInput placeholder="Last name" aria-label="Last name" />
-                </CCol>
-              </CRow>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol> */}
         <CCol xs={12}>
           <CCard className="mb-4">
             {/* <CCardHeader>
@@ -206,7 +183,7 @@ const Service = () => {
                   onSubmit={handleSubmit}
                 >
                   <CCol lg={3} md={6}>
-                    <CFormLabel htmlFor="si">Service</CFormLabel>
+                    <CFormLabel htmlFor="si">Service ***</CFormLabel>
                     <CFormInput onChange={handleFormData} name="si" type="text" id="si" required />
                     <CFormFeedback invalid>Please provide a Service.</CFormFeedback>
                   </CCol>
@@ -238,7 +215,7 @@ const Service = () => {
                     </CFormFeedback>
                   </CCol>
                   <CCol lg={3} md={6}>
-                    <CFormLabel htmlFor="cust_ac_no">Customer Account Number</CFormLabel>
+                    <CFormLabel htmlFor="cust_ac_no">Customer Account Number ***</CFormLabel>
                     <CFormInput
                       onChange={handleFormData}
                       name="cust_ac_no"

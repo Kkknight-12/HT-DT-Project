@@ -198,7 +198,7 @@ const Customer = () => {
                   onSubmit={handleSubmit}
                 >
                   <CCol lg={3} md={6}>
-                    <CFormLabel htmlFor="cust_ac_no">Customer Account Number</CFormLabel>
+                    <CFormLabel htmlFor="cust_ac_no">Customer Account Number ***</CFormLabel>
                     <CFormInput
                       name="cust_ac_no"
                       onChange={handleFormData}

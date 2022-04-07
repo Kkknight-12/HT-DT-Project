@@ -15,6 +15,7 @@ import {
   CTableDataCell,
   CTable,
   CRow,
+  CFormSelect,
 } from '@coreui/react'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -30,9 +31,11 @@ const initialState = {
   imsi: '',
   vcid: '',
   android_id: '',
+  subs: '1',
 }
 const serviceInitialState = {
   si: '',
+  subs: '1',
 }
 
 export default function Service() {
@@ -88,6 +91,21 @@ export default function Service() {
                   <CFormLabel htmlFor="si">Service Instance (SI)</CFormLabel>
                   <CFormInput onChange={handleServiceFormData} name="si" type="text" id="si" />
                 </CCol>
+                <CCol md={6}>
+                  <CFormLabel htmlFor="subs">Subscribe</CFormLabel>
+                  <CFormSelect
+                    size="md"
+                    className="mb-3"
+                    aria-label="Small select example"
+                    name="subs"
+                    id="subs"
+                    onChange={handleServiceFormData}
+                  >
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Finance</option>
+                  </CFormSelect>
+                </CCol>
                 <CCol xs={12}>
                   <CButton type="submit">Search</CButton>
                 </CCol>
@@ -115,6 +133,21 @@ export default function Service() {
                     type="text"
                     id="android_id"
                   />
+                </CCol>
+                <CCol md={6}>
+                  <CFormLabel htmlFor="subs">Subscribe ***</CFormLabel>
+                  <CFormSelect
+                    size="md"
+                    className="mb-3"
+                    aria-label="Small select example"
+                    name="subs"
+                    id="subs"
+                    onChange={handleFormData}
+                  >
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Finance</option>
+                  </CFormSelect>
                 </CCol>
                 <CCol xs={12}>
                   <CButton type="submit">Search</CButton>

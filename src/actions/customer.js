@@ -38,7 +38,6 @@ export const createCustomer = (sendData) => {
       // src_lob: sendData.src_lob,
       // source_systm: sendData.source_systm,
     }
-    // console.log('data', data)
 
     const { respData } = await api.createCustomerRequest(data)
   }
@@ -52,14 +51,17 @@ export const getAllCustomer = (formData) => async (dispatch, getState) => {
 }
 
 export const getCustomerFormSearch = (formData) => async (dispatch, getState) => {
-  let searchTerm = Object.keys(formData).filter((k) => formData[k])
-  searchTerm = searchTerm[0]
-  const { data } = await api.fetchCustomerBySearch(searchTerm, formData[searchTerm])
-  dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
+  // let searchTerm = Object.keys(formData).filter((k) => formData[k])
+  // searchTerm = searchTerm[0]
+  // console.log('getCustomerFormSearch', formData)
+  // const { data } = await api.fetchCustomerBySearch(searchTerm, formData[searchTerm])
+  await api.fetchCustomerBySearch(formData)
+  // dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
 }
 export const getCustomerSearch = (formData) => async (dispatch, getState) => {
   const { cust_ac_no } = formData
-  console.log('getCustomerSearch', formData)
-  const { data } = await api.fetchCustomerBySearch('cust_ac_no', cust_ac_no)
-  dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
+  // console.log('getCustomerSearch', formData)
+  // const { data } = await api.fetchCustomerBySearch('cust_ac_no', cust_ac_no)
+  await api.fetchCustomerByAc(formData)
+  // dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
 }
