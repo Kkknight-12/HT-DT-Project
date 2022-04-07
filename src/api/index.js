@@ -14,7 +14,9 @@ export const fetchCustomerBySearch = (data) => {
   const roleObj = { 1: 'admin', 2: 'manager', 3: 'finance' }
   const subscriberkey = roleObj[subs]
   // return API.get(`/customer?${key}=${value}`)
-  // return axios.get(`http://10.1.1.60:9005/v1/customer?${firstTerm}=${data[firstTerm]}&&${subscriberkey}=${subs}`)
+  return axios.get(
+    `http://10.1.1.60:9005/v1/customer?${firstTerm}=${data[firstTerm]}&&${subscriberkey}=${subs}`,
+  )
 }
 export const fetchCustomerByAc = (data) => {
   let searchTerm = Object.keys(data).filter((k) => data[k])
@@ -24,7 +26,7 @@ export const fetchCustomerByAc = (data) => {
   const roleObj = { 1: 'admin', 2: 'manager', 3: 'finance' }
   const subscriberkey = roleObj[subs]
   // return API.get(`/customer?${key}=${value}`)
-  //   return axios.get(`http://10.1.1.60:9005/v1/customer/${data[firstTerm]}&&${subscriberkey}=${subs}`)
+  return axios.get(`http://10.1.1.60:9005/v1/customer/${data[firstTerm]}&&${subscriberkey}=${subs}`)
 }
 
 export const fetchAllService = () => API.get(`/service`)
@@ -37,7 +39,9 @@ export const fetchServiceBySearch = (data) => {
   const roleObj = { 1: 'admin', 2: 'manager', 3: 'finance' }
   const subscriberkey = roleObj[subs]
   //   return axios.get(`/service?${key}=${value}`)
-  // return axios.get(`/http://10.1.1.60:9005/v1/services?${firstTerm}=${data[firstTerm]}&&${subscriberkey}=${subs}`)
+  return axios.get(
+    `/http://10.1.1.60:9005/v1/services?${firstTerm}=${data[firstTerm]}&&${subscriberkey}=${subs}`,
+  )
 }
 export const fetchServiceBySI = (data) => {
   let searchTerm = Object.keys(data).filter((k) => data[k])
@@ -48,7 +52,9 @@ export const fetchServiceBySI = (data) => {
   const subscriberkey = roleObj[subs]
 
   //   return axios.get(`/service?${key}=${value}`)
-  // return axios.get(`/http://10.1.1.60:9005/v1/services/${data[firstTerm]}&&${subscriberkey}=${subs}`)
+  return axios.get(
+    `/http://10.1.1.60:9005/v1/services/${data[firstTerm]}&&${subscriberkey}=${subs}`,
+  )
 }
 //
 export const createServiceRequest = (data) =>
