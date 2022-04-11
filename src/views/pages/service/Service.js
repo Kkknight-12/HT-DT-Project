@@ -71,9 +71,9 @@ export default function Service() {
     setServiceFormData({ ...serviceformData, [e.target.name]: e.target.value })
   }
 
-  useEffect(() => {
-    dispatch(getAllService(formData))
-  }, [dispatch, formData])
+  // useEffect(() => {
+  //   dispatch(getAllService(formData))
+  // }, [dispatch, formData])
 
   return (
     <>

@@ -43,25 +43,25 @@ export const createCustomer = (sendData) => {
   }
 }
 
-export const getAllCustomer = (formData) => async (dispatch, getState) => {
-  // console.log('formData', formData)
-  const { data } = await api.fetchAllCustomer()
-  // console.log('DATA from getCustomer', data)
-  dispatch({ type: 'FETCH_ALL_CUSTOMER', payload: data })
-}
+// export const getAllCustomer = (formData) => async (dispatch, getState) => {
+//   // console.log('formData', formData)
+//   const { data } = await api.fetchAllCustomer()
+//   // console.log('DATA from getCustomer', data)
+//   dispatch({ type: 'FETCH_ALL_CUSTOMER', payload: data })
+// }
 
 export const getCustomerFormSearch = (formData) => async (dispatch, getState) => {
   // let searchTerm = Object.keys(formData).filter((k) => formData[k])
   // searchTerm = searchTerm[0]
   // console.log('getCustomerFormSearch', formData)
   // const { data } = await api.fetchCustomerBySearch(searchTerm, formData[searchTerm])
-  await api.fetchCustomerBySearch(formData)
-  // dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
+  const { data } = await api.fetchCustomerBySearch(formData)
+  dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
 }
 export const getCustomerSearch = (formData) => async (dispatch, getState) => {
   const { cust_ac_no } = formData
   // console.log('getCustomerSearch', formData)
   // const { data } = await api.fetchCustomerBySearch('cust_ac_no', cust_ac_no)
-  await api.fetchCustomerByAc(formData)
-  // dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
+  const { data } = await api.fetchCustomerByAc(formData)
+  dispatch({ type: 'FETCH_BY_SEARCH', payload: data })
 }

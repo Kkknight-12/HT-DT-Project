@@ -49,12 +49,12 @@ export const createService = (sendData) => {
   }
 }
 
-export const getAllService = (formData) => async (dispatch, getState) => {
-  // console.log('getAllService', formData)
-  const { data } = await api.fetchAllService()
-  // console.log('DATA from getService', data)
-  dispatch({ type: 'FETCH_ALL_SERVICE', payload: data })
-}
+// export const getAllService = (formData) => async (dispatch, getState) => {
+//   // console.log('getAllService', formData)
+//   const { data } = await api.fetchAllService()
+//   // console.log('DATA from getService', data)
+//   dispatch({ type: 'FETCH_ALL_SERVICE', payload: data })
+// }
 
 export const getServiceFormSearch = (formData) => async (dispatch, getState) => {
   // let searchTerm = Object.keys(formData).filter((k) => formData[k])
@@ -62,12 +62,12 @@ export const getServiceFormSearch = (formData) => async (dispatch, getState) => 
   // console.log('searchTerm', searchTerm, formData[searchTerm])
   // const { data } = await api.fetchServiceBySearch(searchTerm, formData[searchTerm])
   // console.log('getServiceFormSearch', formData)
-  await api.fetchServiceBySearch(formData)
-  // dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: data })
+  const { data } = await api.fetchServiceBySearch(formData)
+  dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: data })
 }
 export const getServiceSearch = (formData) => async (dispatch, getState) => {
   // const { si } = formData
   // const { data } = await api.fetchServiceBySearch('si', si)
-  await api.fetchServiceBySI(formData)
-  // dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: data })
+  const { data } = await api.fetchServiceBySI(formData)
+  dispatch({ type: 'FETCH_SERVICE_BY_SEARCH', payload: data })
 }

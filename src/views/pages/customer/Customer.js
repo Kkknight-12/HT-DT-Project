@@ -70,9 +70,9 @@ export default function Customer() {
     setCustomerFormData({ ...formCustomerData, [e.target.name]: e.target.value })
   }
 
-  useEffect(() => {
-    dispatch(getAllCustomer(formData))
-  }, [dispatch, formData])
+  // useEffect(() => {
+  //   dispatch(getAllCustomer(formData))
+  // }, [dispatch, formData])
   return (
     <>
       <CRow>
